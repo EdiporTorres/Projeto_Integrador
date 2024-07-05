@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.generation</groupId>
-	<artifactId>generation</artifactId>
+	<artifactId>EConectar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>E-conectar</name>
 	<description>Projeto integrador Generation</description>
