@@ -18,7 +18,7 @@ public class CategoriaModel {
 	
 	@NotBlank(message = "O nome da categoria é obrigatório!")
 	@Size(min = 1, max = 255, message = "O nome da categoria deve conter no mínimo 1 e no máximo 255 caracteres")
-	private String nome_categoria;
+	private String nomeCategoria;
 	
 	@NotBlank(message = "A descrição é obrigatória!")
 	@Size(min = 1, max = 1000, message = "A descrição deve conter no mínimo 1 e no máximo 1000 caracteres")
@@ -32,12 +32,12 @@ public class CategoriaModel {
 		this.id = id;
 	}
 
-	public String getNome_categoria() {
-		return nome_categoria;
+	public String getnomeCategoria() {
+		return nomeCategoria;
 	}
 
-	public void setNome_categoria(String nome_categoria) {
-		this.nome_categoria = nome_categoria;
+	public void setnomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
 	}
 
 	public String getDescricao() {
