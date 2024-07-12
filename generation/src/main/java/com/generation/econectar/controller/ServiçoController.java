@@ -58,17 +58,10 @@ public class ServiçoController {
 	public Serviço comprarServiço(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
 		Serviço serviço = serviçorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
 		serviço.setComprador(comprador);
-		serviço.setStatus("Comprador");
+		serviço.setStatus("Comprado");
 		return serviçorepository.save(serviço);
 
 	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<Serviço> put(@Valid  @PathVariable long id, @RequestBody Serviço serviço) {
-		serviço.setId(id);
-		return ResponseEntity.status(HttpStatus.OK).body(serviçorepository.save(serviço));
-	}
-	
 	@PutMapping("/{id}/vender")
 	public Serviço venderServiço(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
 		Serviço serviço = serviçorepository.findById(id)
@@ -77,6 +70,14 @@ public class ServiçoController {
 		serviço.setStatus("Vendido");
 		return serviçorepository.save(serviço);
 	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Serviço> put(@Valid  @PathVariable long id, @RequestBody Serviço serviço) {
+		serviço.setId(id);
+		return ResponseEntity.status(HttpStatus.OK).body(serviçorepository.save(serviço));
+	}
+	
+
 	
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)

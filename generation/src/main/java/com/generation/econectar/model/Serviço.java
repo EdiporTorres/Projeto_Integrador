@@ -1,5 +1,7 @@
 package com.generation.econectar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,19 +37,23 @@ public class Serviço {
 	private String sobreMim;
 	
 	private String status;
-	
+	@ManyToOne
+	@JsonIgnoreProperties({"servicosVendidos", "servicosComprados"})
+	@JoinColumn(name = "vendedor_id", nullable = false )
+	private Usuario vendedor;
+	@ManyToOne
+	@JsonIgnoreProperties({"servicosVendidos", "servicosComprados"})
+	@JoinColumn(name = "comprador_id", nullable = false )
+	private Usuario comprador;
 	
 	@ManyToOne
+	@JsonIgnoreProperties({"categoria_id", "categoria_id"})
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
 	
-	@ManyToOne
-	@JoinColumn(name = "vendedor_id", nullable = false )
-	private Usuario vendedor;
+
 	
-	@ManyToOne
-	@JoinColumn(name = "comprador_id", nullable = false )
-	private Usuario comprador;
+
 
 	public Categoria getCategoria() {
 		return categoria;

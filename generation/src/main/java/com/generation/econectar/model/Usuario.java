@@ -3,6 +3,8 @@ package com.generation.econectar.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,9 +52,11 @@ public class Usuario {
 	private String foto;
 	
 	@OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"vendedor"})
 	private Set<Serviço> ServicosVendidos;
 	
 	@OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"comprador"})
 	private Set<Serviço> ServicosComprados;
 
 	public Set<Serviço> getServicosVendidos() {

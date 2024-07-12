@@ -2,6 +2,8 @@ package com.generation.econectar.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Categoria {
 	private String descricao;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"categoria"})
 	private Set<Serviço> serviço;
 
 	public String getNomeCategoria() {
