@@ -55,13 +55,6 @@ public class Categoria {
 		this.id = id;
 	}
 
-	public String getnomeCategoria() {
-		return nomeCategoria;
-	}
-
-	public void setnomeCategoria(String nomeCategoria) {
-		this.nomeCategoria = nomeCategoria;
-	}
 
 	public String getDescricao() {
 		return descricao;

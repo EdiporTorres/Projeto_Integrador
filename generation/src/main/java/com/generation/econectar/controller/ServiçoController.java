@@ -25,7 +25,7 @@ import com.generation.econectar.model.Usuario;
 import com.generation.econectar.repository.ServiçoRepository;
 
 import jakarta.validation.Valid;
-
+	
 @RestController
 @RequestMapping("/servico")
 @CrossOrigin(origins = "*", allowedHeaders = "*")

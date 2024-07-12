@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -26,15 +27,13 @@ public class Serviço {
 	@Size(min = 1, max = 1000, message = "A descrição deve conter no mínimo 1 e no máximo 1000 caracteres")
 	private String descricao;
 	
-	@NotBlank(message = "O valor é obrigatório!")
+	@NotNull(message = "O valor é obrigatório!")
 	private double valor;
 	
 	@NotBlank(message = "Sobre mim é obrigatória!")
 	@Size(min = 1, max = 1000, message = "Sobre mim deve conter no mínimo 1 e no máximo 1000 caracteres")
 	private String sobreMim;
 	
-	
-
 	private String status;
 	
 	
@@ -43,11 +42,11 @@ public class Serviço {
 	private Categoria categoria;
 	
 	@ManyToOne
-	@JoinColumn(name = "vendedor_id", nullable = false)
+	@JoinColumn(name = "vendedor_id", nullable = false )
 	private Usuario vendedor;
 	
 	@ManyToOne
-	@JoinColumn(name = "comprador_id", nullable = false)
+	@JoinColumn(name = "comprador_id", nullable = false )
 	private Usuario comprador;
 
 	public Categoria getCategoria() {
