@@ -1,9 +1,12 @@
 package com.generation.econectar.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +24,8 @@ import com.generation.econectar.model.Serviço;
 import com.generation.econectar.model.Usuario;
 import com.generation.econectar.repository.ServiçoRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/servico")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -30,11 +35,11 @@ public class ServiçoController {
 	private ServiçoRepository serviçorepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Serviço>> getAll() {
-		return ResponseEntity.ok(serviçorepository.findAll());
+	public ResponseEntity<Page<Serviço>> getAll(Pageable pageble) {
+		return ResponseEntity.ok(serviçorepository.findAll(pageble));
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Serviço> getById(@PathVariable long id) {
+	public ResponseEntity<Serviço> getById( @PathVariable long id) {
 		return serviçorepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -45,18 +50,34 @@ public class ServiçoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Serviço> post(@RequestBody Serviço serviço) {
+	public ResponseEntity<Serviço> post(@Valid @RequestBody Serviço serviço) {
 		return ResponseEntity.status(201).body(serviçorepository.save(serviço));
 	}
 	
 	@PutMapping("/{id}/comprar")
-	public Serviço comprarServiço(@PathVariable long id, @RequestBody Usuario comprador) {
+	public Serviço comprarServiço(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
 		Serviço serviço = serviçorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
 		serviço.setComprador(comprador);
 		serviço.setStatus("Comprador");
 		return serviçorepository.save(serviço);
 
 	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Serviço> put(@Valid  @PathVariable long id, @RequestBody Serviço serviço) {
+		serviço.setId(id);
+		return ResponseEntity.status(HttpStatus.OK).body(serviçorepository.save(serviço));
+	}
+	
+	@PutMapping("/{id}/vender")
+	public Serviço venderServiço(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
+		Serviço serviço = serviçorepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+		serviço.setVendedor(vendedor);
+		serviço.setStatus("Vendido");
+		return serviçorepository.save(serviço);
+	}
+	
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")

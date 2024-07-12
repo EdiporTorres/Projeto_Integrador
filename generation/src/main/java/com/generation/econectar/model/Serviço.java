@@ -34,9 +34,13 @@ public class Serviço {
 	private String sobreMim;
 	
 	
+
+	private String status;
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", nullable = false)
-	private Categorial categoria;
+	private Categoria categoria;
 	
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id", nullable = false)
@@ -46,11 +50,11 @@ public class Serviço {
 	@JoinColumn(name = "comprador_id", nullable = false)
 	private Usuario comprador;
 
-	public Categorial getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categorial categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
@@ -111,7 +115,14 @@ public class Serviço {
 	}
 
 
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	
 
 }

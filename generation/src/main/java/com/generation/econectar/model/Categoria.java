@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_categoria")
-public class Categorial {
+public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
