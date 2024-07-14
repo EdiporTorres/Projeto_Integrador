@@ -20,61 +20,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.generation.econectar.model.Serviço;
+import com.generation.econectar.model.Servico;
 import com.generation.econectar.model.Usuario;
-import com.generation.econectar.repository.ServiçoRepository;
+import com.generation.econectar.repository.ServicoRepository;
 
 import jakarta.validation.Valid;
 	
 @RestController
 @RequestMapping("/servico")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ServiçoController {
+public class ServicoController {
 	
 	@Autowired
-	private ServiçoRepository serviçorepository;
+	private ServicoRepository servicorepository;
 	
 	@GetMapping
-	public ResponseEntity<Page<Serviço>> getAll(Pageable pageble) {
-		return ResponseEntity.ok(serviçorepository.findAll(pageble));
+	public ResponseEntity<Page<Servico>> getAll(Pageable pageble) {
+		return ResponseEntity.ok(servicorepository.findAll(pageble));
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Serviço> getById( @PathVariable long id) {
-		return serviçorepository.findById(id).map(resp -> ResponseEntity.ok(resp))
+	public ResponseEntity<Servico> getById( @PathVariable long id) {
+		return servicorepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping("/nomeServico/{nomeServico}")
-	public ResponseEntity<List<Serviço>> getByNomeServico(@PathVariable String nomeServico) {
-		return ResponseEntity.ok(serviçorepository.findAllBynomeServicoContainingIgnoreCase(nomeServico));
+	public ResponseEntity<List<Servico>> getByNomeServico(@PathVariable String nomeServico) {
+		return ResponseEntity.ok(servicorepository.findAllBynomeServicoContainingIgnoreCase(nomeServico));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Serviço> post(@Valid @RequestBody Serviço serviço) {
-		return ResponseEntity.status(201).body(serviçorepository.save(serviço));
+	public ResponseEntity<Servico> post(@Valid @RequestBody Servico serviço) {
+		return ResponseEntity.status(201).body(servicorepository.save(serviço));
 	}
 	
 	@PutMapping("/{id}/comprar")
-	public Serviço comprarServiço(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
-		Serviço serviço = serviçorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+	public Servico comprarServiço(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
+		Servico serviço = servicorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
 		serviço.setComprador(comprador);
 		serviço.setStatus("Comprado");
-		return serviçorepository.save(serviço);
+		return servicorepository.save(serviço);
 
 	}
 	@PutMapping("/{id}/vender")
-	public Serviço venderServiço(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
-		Serviço serviço = serviçorepository.findById(id)
+	public Servico venderServiço(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
+		Servico serviço = servicorepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
 		serviço.setVendedor(vendedor);
 		serviço.setStatus("Vendido");
-		return serviçorepository.save(serviço);
+		return servicorepository.save(serviço);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Serviço> put(@Valid  @PathVariable long id, @RequestBody Serviço serviço) {
+	public ResponseEntity<Servico> put(@Valid  @PathVariable long id, @RequestBody Servico serviço) {
 		serviço.setId(id);
-		return ResponseEntity.status(HttpStatus.OK).body(serviçorepository.save(serviço));
+		return ResponseEntity.status(HttpStatus.OK).body(servicorepository.save(serviço));
 	}
 	
 
@@ -83,9 +83,9 @@ public class ServiçoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void deleteServiço(@PathVariable long id) {
-		Optional<Serviço> serviço = serviçorepository.findById(id);
+		Optional<Servico> serviço = servicorepository.findById(id);
 		if (serviço.isPresent()) {
-			serviçorepository.delete(serviço.get());
+			servicorepository.delete(serviço.get());
 			
 		}
 	}
