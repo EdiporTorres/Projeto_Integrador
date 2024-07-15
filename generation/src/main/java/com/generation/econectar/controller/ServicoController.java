@@ -50,31 +50,31 @@ public class ServicoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Servico> post(@Valid @RequestBody Servico serviço) {
-		return ResponseEntity.status(201).body(servicorepository.save(serviço));
+	public ResponseEntity<Servico> post(@Valid @RequestBody Servico servico) {
+		return ResponseEntity.status(201).body(servicorepository.save(servico));
 	}
 	
 	@PutMapping("/{id}/comprar")
 	public Servico comprarServiço(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
-		Servico serviço = servicorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
-		serviço.setComprador(comprador);
-		serviço.setStatus("Comprado");
-		return servicorepository.save(serviço);
+		Servico servico = servicorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+		servico.setComprador(comprador);
+		servico.setStatus("Comprado");
+		return servicorepository.save(servico);
 
 	}
 	@PutMapping("/{id}/vender")
 	public Servico venderServiço(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
-		Servico serviço = servicorepository.findById(id)
+		Servico servico = servicorepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
-		serviço.setVendedor(vendedor);
-		serviço.setStatus("Vendido");
-		return servicorepository.save(serviço);
+		servico.setVendedor(vendedor);
+		servico.setStatus("Vendido");
+		return servicorepository.save(servico);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Servico> put(@Valid  @PathVariable long id, @RequestBody Servico serviço) {
-		serviço.setId(id);
-		return ResponseEntity.status(HttpStatus.OK).body(servicorepository.save(serviço));
+	public ResponseEntity<Servico> put(@Valid  @PathVariable long id, @RequestBody Servico servico) {
+		servico.setId(id);
+		return ResponseEntity.status(HttpStatus.OK).body(servicorepository.save(servico));
 	}
 	
 
@@ -82,10 +82,10 @@ public class ServicoController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
-	public void deleteServiço(@PathVariable long id) {
-		Optional<Servico> serviço = servicorepository.findById(id);
-		if (serviço.isPresent()) {
-			servicorepository.delete(serviço.get());
+	public void deleteServico(@PathVariable long id) {
+		Optional<Servico> servico = servicorepository.findById(id);
+		if (servico.isPresent()) {
+			servicorepository.delete(servico.get());
 			
 		}
 	}
