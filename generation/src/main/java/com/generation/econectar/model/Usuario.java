@@ -12,7 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -27,8 +29,8 @@ public class Usuario {
 	@Size(min = 1, max = 255, message = "O nome do usuário deve conter no mínimo 1 e no máximo 255 caracteres")
 	private String nomeUsuario;
 	
-	@NotBlank(message = "O email é obrigatório!")
-	@Size(min = 1, max = 255, message = "O email deve conter no mínimo 1 e no máximo 255 caracteres")
+	@NotNull(message = "O email é obrigatório!")
+	@Email(message = "O atributo email é obrigatório")
 	private String email;
 	
 	@NotBlank(message = "A senha é obrigatória!")

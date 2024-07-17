@@ -41,6 +41,7 @@ public class Servico {
 	@JsonIgnoreProperties({"servicosVendidos", "servicosComprados"})
 	@JoinColumn(name = "vendedor_id", nullable = false )
 	private Usuario vendedor;
+	
 	@ManyToOne
 	@JsonIgnoreProperties({"servicosVendidos", "servicosComprados"})
 	@JoinColumn(name = "comprador_id", nullable = false )

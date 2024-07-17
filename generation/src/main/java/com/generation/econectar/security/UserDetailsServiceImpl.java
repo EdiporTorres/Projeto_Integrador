@@ -8,10 +8,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.generation.econectar.model.Usuario;
 import com.generation.econectar.repository.UsuarioRepository;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
@@ -26,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	Usuario usuario = usuarioOptional.get();
 	
 	return User.builder()
-			.username(usuario.getNomeUsuario())
+			.username(usuario.getEmail())
 			.password(usuario.getSenha())
 			.authorities(Collections.emptyList())
 			.build();
