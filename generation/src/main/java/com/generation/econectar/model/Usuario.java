@@ -53,25 +53,25 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"vendedor"})
-	private Set<Serviço> ServicosVendidos;
+	private Set<Servico> ServicosVendidos;
 	
 	@OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"comprador"})
-	private Set<Serviço> ServicosComprados;
+	private Set<Servico> ServicosComprados;
 
-	public Set<Serviço> getServicosVendidos() {
+	public Set<Servico> getServicosVendidos() {
 		return ServicosVendidos;
 	}
 
-	public void setServicosVendidos(Set<Serviço> servicosVendidos) {
+	public void setServicosVendidos(Set<Servico> servicosVendidos) {
 		ServicosVendidos = servicosVendidos;
 	}
 
-	public Set<Serviço> getServicosComprados() {
+	public Set<Servico> getServicosComprados() {
 		return ServicosComprados;
 	}
 
-	public void setServicosComprados(Set<Serviço> servicosComprados) {
+	public void setServicosComprados(Set<Servico> servicosComprados) {
 		ServicosComprados = servicosComprados;
 	}
 
@@ -138,6 +138,7 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
 	
 	
 }
