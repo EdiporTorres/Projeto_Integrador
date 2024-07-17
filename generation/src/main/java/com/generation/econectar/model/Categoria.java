@@ -32,7 +32,7 @@ public class Categoria {
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"categoria"})
-	private Set<Servico> serviço;
+	private Set<Servico> servico;
 
 	public String getNomeCategoria() {
 		return nomeCategoria;
@@ -43,11 +43,11 @@ public class Categoria {
 	}
 
 	public Set<Servico> getServiço() {
-		return serviço;
+		return servico;
 	}
 
-	public void setServiço(Set<Servico> serviço) {
-		this.serviço = serviço;
+	public void setServiço(Set<Servico> servico) {
+		this.servico = servico;
 	}
 
 	public Long getId() {

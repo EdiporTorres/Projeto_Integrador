@@ -55,29 +55,22 @@ public class ServicoController {
 	}
 	
 	@PutMapping("/{id}/comprar")
-	public Servico comprarServiço(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
-		Servico servico = servicorepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+	public Servico comprarServico(@Valid @PathVariable long id, @RequestBody Usuario comprador) {
+		Servico servico = servicorepository.findById(id).orElseThrow(() -> new RuntimeException("Servico não encontrado"));
 		servico.setComprador(comprador);
 		servico.setStatus("Comprado");
 		return servicorepository.save(servico);
 
 	}
 	@PutMapping("/{id}/vender")
-	public Servico venderServiço(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
+	public Servico venderServico(@Valid  @PathVariable long id, @RequestBody Usuario vendedor) {
 		Servico servico = servicorepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+				.orElseThrow(() -> new RuntimeException("Servico não encontrado"));
 		servico.setVendedor(vendedor);
 		servico.setStatus("Vendido");
 		return servicorepository.save(servico);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Servico> put(@Valid  @PathVariable long id, @RequestBody Servico servico) {
-		servico.setId(id);
-		return ResponseEntity.status(HttpStatus.OK).body(servicorepository.save(servico));
-	}
-	
-
 	
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -85,9 +78,8 @@ public class ServicoController {
 	public void deleteServico(@PathVariable long id) {
 		Optional<Servico> servico = servicorepository.findById(id);
 		if (servico.isPresent()) {
-			servicorepository.delete(servico.get());
-			
-		}
+			servicorepository.delete(servico.get());}
 	}
+
 
 }

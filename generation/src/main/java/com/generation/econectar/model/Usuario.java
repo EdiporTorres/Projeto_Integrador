@@ -12,7 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -24,12 +26,12 @@ public class Usuario {
 	private Long id;
 	
 	@NotBlank(message = "O nome do usuário é obrigatório!")
+	@Email(message = "O atributo email é obrigatório")
 	@Size(min = 1, max = 255, message = "O nome do usuário deve conter no mínimo 1 e no máximo 255 caracteres")
-	private String nomeUsuario;
+	private String usuario;
 	
-	@NotBlank(message = "O email é obrigatório!")
-	@Size(min = 1, max = 255, message = "O email deve conter no mínimo 1 e no máximo 255 caracteres")
-	private String email;
+	@NotNull(message = "O nome é obrigatório!")
+	private String nome;
 	
 	@NotBlank(message = "A senha é obrigatória!")
 	@Size(min = 7, max = 64, message = "A senha deve conter no mínimo 7 e no máximo 64 caracteres")
@@ -43,8 +45,7 @@ public class Usuario {
 	@Size(min = 11, max = 11, message = "O CPF deve conter 11 caracteres")
 	private String cpf;
 	
-	@NotBlank(message = "a data de nascimento é obrigatório!")
-	@Size(min = 10, max = 10, message = "A data de nascimento deve conter 10 caracteres")
+	@NotNull(message = "a data de nascimento é obrigatório!")
 	private LocalDate dataNascimento;
 	
 	@NotBlank(message = "a Foto é obrigatório!")
@@ -83,20 +84,20 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getSenha() {
@@ -138,6 +139,7 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
 	
 	
 }
