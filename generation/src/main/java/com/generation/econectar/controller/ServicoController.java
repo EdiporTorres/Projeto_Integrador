@@ -29,7 +29,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/servico")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ServiçoController {
+public class ServicoController {
 	
 	@Autowired
 	private ServicoRepository servicorepository;
